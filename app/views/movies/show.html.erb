@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= @movie.name %></strong>
+
+</p>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Bad Word</th>
+      <th>Amount Used</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all_words.uniq.each do |word| %>
+      <tr>
+        <td><%= word %></td>
+        <td><%= @all_words.select {|a| a == word }.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+        <tr>
+          <td>Total</td>
+          <td><%= @total %></td>
+        </tr>
+  </tfoot>
+</table>

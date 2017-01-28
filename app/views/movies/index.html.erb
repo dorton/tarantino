@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tatantino Movies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Total Profanities</th>
+      <th>Total Minutes</th>
+      <th>Profanity per minute</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movies.each do |movie| %>
+      <tr>
+        <td><%= link_to movie.name, movie_path(movie) %></td>
+        <td><%= movie.datasets.where(event: 'word').count %></td>
+        <td><%= movie.minutes %></td>
+        <td><%= movie.datasets.where(event: 'word').count/movie.minutes.to_f %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

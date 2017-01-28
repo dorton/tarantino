@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  movie: MyString
+  type: 
+  word: MyString
+  minutes_in: MyString
+
+two:
+  movie: MyString
+  type: 
+  word: MyString
+  minutes_in: MyString
