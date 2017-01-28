@@ -27,33 +27,62 @@
       </li>
     </ul>
   </li>
-  <li class="collection-item"><h5>Movie with highest density of potty mouth words:</h5>
-    <ul>
-      <li class="collection-item">
-        <table class="responsive-table">
-          <thead>
-            <tr>
-              <th>Movie</th>
-              <th>Total Potty Mouth Words</th>
-              <th>Total Minutes</th>
-              <th>Potty mouth words per minute</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% Movie.density_arr.each do |movie| %>
+  <div class="hide-on-small-only">
+    <li class="collection-item"><h5>Movie with highest density of potty mouth words:</h5>
+      <ul>
+        <li class="collection-item">
+          <table>
+            <thead>
               <tr>
-                <td><%= movie[0] %></td>
-                <td><%= Movie.find_by(name: movie[0]).datasets.where(event: 'word').count %></td>
-                <td><%= Movie.find_by(name: movie[0]).minutes %></td>
-                <td><%= movie[1] %></td>
+                <th>Movie</th>
+                <th>Total Potty Mouth Words</th>
+                <th>Total Minutes</th>
+                <th>Potty mouth words per minute</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </li>
-    </ul>
-  </li>
+            </thead>
+
+            <tbody>
+              <% Movie.density_arr.each do |movie| %>
+                <tr>
+                  <td><%= movie[0] %></td>
+                  <td><%= Movie.find_by(name: movie[0]).datasets.where(event: 'word').count %></td>
+                  <td><%= Movie.find_by(name: movie[0]).minutes %></td>
+                  <td><%= movie[1] %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </li>
+      </ul>
+    </li>
+  </div>
+
+  <div class="hide-on-med-and-up">
+    <li class="collection-item"><h5>Movie with highest density of potty mouth words:</h5>
+      <ul>
+        <li class="collection-item">
+          <table>
+            <thead>
+              <tr>
+                <th>Movie</th>
+                <th>Potty mouth words per minute</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% Movie.density_arr.each do |movie| %>
+                <tr>
+                  <td><%= movie[0] %></td>
+                  <td><%= movie[1] %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </li>
+      </ul>
+    </li>
+  </div>
+
   <li class="collection-item"><h5>Favorite use of the F Bomb:</h5>
     <ul>
       <li class="collection-item">
