@@ -12,6 +12,8 @@ class ProfaneWord
     unique_words_array = all_words.uniq
   end
 
+
+
   def word_counts
     the_words.each do |word|
       all_words.select {|a| a == word }.count

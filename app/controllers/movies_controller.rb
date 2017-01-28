@@ -5,6 +5,16 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     @movies = Movie.all
+    @word_objects = Dataset.where("profane_word is NOT ?", nil)
+    @word_array = Dataset.where("profane_word is NOT ?", nil).map { |e| e.profane_word  }
+    @unique_words = @word_array.uniq
+    @word_instances_count = @word_objects.count
+    @freq = @word_array.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+    @most_frequent_word = @word_array.max_by { |v| @freq[v] }
+    @top_five = @freq.sort_by { |k,v| v }.reverse.first(5)
+    @fbombs = @word_array.select {|a| /fuck/ =~ a }
+    @fbombfreq = @fbombs.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+    @sorted_fbombs = @fbombfreq.sort_by { |k,v| v }.reverse
   end
 
   # GET /movies/1

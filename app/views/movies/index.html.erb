@@ -1,27 +1,86 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tatantino Movies</h1>
+<ul class="collection with-header">
+  <li class="collection-header"><h4><%= @unique_words.count %> potty mouth words are use a total of <%= @word_instances_count %> times in <%= Movie.count %> movies.</h4></li>
+</ul>
+<ul class="collection with-header">
+  <li class="collection-header"><h4>Fun Facts</h4></li>
+  <li class="collection-item"><h5>Top 5 most frequently used potty mouth words:</h5>
+    <ul>
+      <li class="collection-item">
+        <table>
+          <thead>
+            <tr>
+              <th>Potty mouth word</th>
+              <th>Frequency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @top_five.each do |t5| %>
+              <tr>
+                <td><%= t5[0].titleize %></td>
+                <td><%= t5[1] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+  <li class="collection-item"><h5>Movie with highest density of potty mouth words:</h5>
+    <ul>
+      <li class="collection-item">
+        <table>
+          <thead>
+            <tr>
+              <th>Movie</th>
+              <th>Total Potty Mouth Words</th>
+              <th>Total Minutes</th>
+              <th>Potty mouth words per minute</th>
+            </tr>
+          </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Total Profanities</th>
-      <th>Total Minutes</th>
-      <th>Profanity per minute</th>
-    </tr>
-  </thead>
+          <tbody>
+            <% Movie.density_arr.each do |movie| %>
+              <tr>
+                <td><%= link_to movie[0], movie_path(Movie.find_by(name: movie[0])) %></td>
+                <td><%= Movie.find_by(name: movie[0]).datasets.where(event: 'word').count %></td>
+                <td><%= Movie.find_by(name: movie[0]).minutes %></td>
+                <td><%= movie[1] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+  <li class="collection-item"><h5>Favorite use of the F Bomb:</h5>
+    <ul>
+      <li class="collection-item">
+        <table>
+          <thead>
+            <tr>
+              <th>F-Bomb</th>
+              <th>Frequency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @sorted_fbombs.each do |fbomb| %>
+            <tr>
+              <td><%= fbomb[0] %></td>
+              <td><%= fbomb[1] %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
 
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td><%= link_to movie.name, movie_path(movie) %></td>
-        <td><%= movie.datasets.where(event: 'word').count %></td>
-        <td><%= movie.minutes %></td>
-        <td><%= movie.datasets.where(event: 'word').count/movie.minutes.to_f %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+</ul>
+
+
+
 
 <br>
