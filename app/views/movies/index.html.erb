@@ -1,6 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tatantino Movies</h1>
 <ul class="collection with-header">
   <li class="collection-header"><h4><%= @unique_words.count %> potty mouth words are use a total of <%= @word_instances_count %> times in <%= Movie.count %> movies.</h4></li>
 </ul>
@@ -44,7 +43,7 @@
           <tbody>
             <% Movie.density_arr.each do |movie| %>
               <tr>
-                <td><%= link_to movie[0], movie_path(Movie.find_by(name: movie[0])) %></td>
+                <td><%= movie[0] %></td>
                 <td><%= Movie.find_by(name: movie[0]).datasets.where(event: 'word').count %></td>
                 <td><%= Movie.find_by(name: movie[0]).minutes %></td>
                 <td><%= movie[1] %></td>
